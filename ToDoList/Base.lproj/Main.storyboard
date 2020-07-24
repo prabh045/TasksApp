@@ -72,11 +72,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="To Do List" id="rz8-5m-ttO">
-                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="0Dr-KN-qad">
-                            <connections>
-                                <action selector="saveTasks:" destination="BYZ-38-t0r" id="LXO-jT-TWp"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dOY-3v-StZ">
                             <connections>
                                 <action selector="addTask:" destination="BYZ-38-t0r" id="nUC-tx-KhT"/>
@@ -134,7 +129,7 @@
                                 <action selector="cancelAction:" destination="Yw1-kr-fbg" id="la0-mI-bho"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="fU0-WJ-6cx">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="fU0-WJ-6cx">
                             <connections>
                                 <action selector="addTask:" destination="Yw1-kr-fbg" id="8K5-UJ-BnN"/>
                             </connections>

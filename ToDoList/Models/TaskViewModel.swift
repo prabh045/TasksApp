@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 //Task of viewViewModel is to provide the VC/Views with displayable info like date string
 class TaskViewModel {
@@ -22,6 +23,9 @@ class TaskViewModel {
     var isCompleted: Bool {
         return self.task.isCompleted
     }
+    var date: Date {
+        return self.task.taskDate
+    }
     
     init(task: TaskModel) {
         self.task = task
@@ -30,16 +34,26 @@ class TaskViewModel {
     private func dateFormatter(date: Date) -> String{
         // subtracted 6.5 hours to make it IST
         var correctedDate = date
-        correctedDate = Date(timeInterval: TimeInterval(exactly: -23400)!, since: date)
+//        correctedDate = Date(timeInterval: TimeInterval(exactly: -23400)!, since: date)
 
         let dateFormmater = DateFormatter()
-        dateFormmater.dateFormat = "dd MMMM YYYY"
-        print(correctedDate)
+        dateFormmater.dateFormat = "dd MMMM YYYY hh mm ss"
+        print("3",correctedDate)
         return dateFormmater.string(from: correctedDate)
     }
     
-    func fetchData() {
-        //CoreDataService
+    static func fetchData() -> [TaskViewModel] {
+        var taskViewModelArray = [TaskViewModel]()
+        let tasks: [NSManagedObject] = CoreDataService.retrieveTasks()
+        for task in tasks {
+            let name = task.value(forKey: "name") as! String
+            let date = task.value(forKey: "date") as! Date
+            let isCompleted = task.value(forKey: "isCompleted")
+            let task = TaskModel(taskDate: date, taskName: name)
+            let taskViewModel = TaskViewModel(task: task)
+            taskViewModelArray.append(taskViewModel)
+        }
+        return taskViewModelArray
     }
     
 }

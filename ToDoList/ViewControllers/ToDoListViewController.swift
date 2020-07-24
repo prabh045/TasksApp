@@ -20,6 +20,12 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "~~To Do List~~"
+        DispatchQueue.main.async {
+            self.toDoList = TaskViewModel.fetchData()
+            self.toDoListTableView.reloadData()
+        }
+        
+       
     }
     
     //MARK: Tableview DataSource Methods
@@ -44,15 +50,6 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func addTask(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "addTask", sender: nil)
     }
-    
-    @IBAction func saveTasks(_ sender: UIBarButtonItem) {
-        guard !toDoList.isEmpty else {
-            os_log("To do list is empty. Try adding some tasks first before saving them")
-            return
-        }
-        CoreDataService.saveTask(toDoList)
-    }
-    
     
     //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

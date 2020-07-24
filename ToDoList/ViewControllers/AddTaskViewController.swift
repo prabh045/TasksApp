@@ -29,6 +29,7 @@ class AddTaskViewController: UIViewController {
     //MARK: Actions
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -40,9 +41,16 @@ class AddTaskViewController: UIViewController {
             return
         }
         let taskDate = taskTimePicker.date
-        let taskModel = TaskModel(taskDate: taskDate, taskName: name)
+        print("1",taskDate)
+        let correctedDate = Date(timeInterval: TimeInterval(exactly: (23400-3600))!, since: taskDate)
+        print("2",correctedDate)
+        
+        let taskModel = TaskModel(taskDate: correctedDate, taskName: name)
         let taskViewModel = TaskViewModel(task: taskModel)
         delegate?.retrieveTask(task: taskViewModel)
+        if CoreDataService.saveTask(taskModel) {
+            NotificationService.getNotificationSettings(task: taskViewModel)
+        }
         self.dismiss(animated: true, completion: nil)
         
         
