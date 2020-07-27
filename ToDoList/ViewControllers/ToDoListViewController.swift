@@ -25,7 +25,6 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             self.toDoListTableView.reloadData()
         }
         
-       
     }
     
     //MARK: Tableview DataSource Methods
@@ -40,7 +39,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         let task = toDoList[indexPath.row]
         cell.taskNameLabel.text = task.taskName
-        cell.taskDateLabel.text = task.taskDate
+        cell.taskDateLabel.text = "\(task.taskDate) at \(task.taskTime.0):\(task.taskTime.1)"
         
         return cell
     }

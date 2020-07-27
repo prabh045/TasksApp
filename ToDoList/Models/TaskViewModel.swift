@@ -26,20 +26,31 @@ class TaskViewModel {
     var date: Date {
         return self.task.taskDate
     }
+
+    var taskHour: Int = 0
+    var taskMinute: Int = 0
     
-    init(task: TaskModel) {
+    var taskTime = (00,00)
+    
+    init(task: TaskModel, taskTime: (Int,Int)) {
         self.task = task
+        self.taskTime = taskTime
     }
     
     private func dateFormatter(date: Date) -> String{
         // subtracted 6.5 hours to make it IST
-        var correctedDate = date
+        //var correctedDate = date
 //        correctedDate = Date(timeInterval: TimeInterval(exactly: -23400)!, since: date)
 
         let dateFormmater = DateFormatter()
-        dateFormmater.dateFormat = "dd MMMM YYYY hh mm ss"
-        print("3",correctedDate)
-        return dateFormmater.string(from: correctedDate)
+        
+        dateFormmater.dateFormat = "dd MMMM YYYY"
+        dateFormmater.timeZone = TimeZone.init(identifier: "GMT")
+        //prints correct date
+        print("corrected date in formatter",date)
+        //prints incorrect date WTH
+        print(dateFormmater.string(from: date))
+        return dateFormmater.string(from: date)
     }
     
     static func fetchData() -> [TaskViewModel] {
@@ -49,8 +60,9 @@ class TaskViewModel {
             let name = task.value(forKey: "name") as! String
             let date = task.value(forKey: "date") as! Date
             let isCompleted = task.value(forKey: "isCompleted")
+            let taskTime = (task.value(forKey: "taskHour"),task.value(forKey: "taskMinute")) as! (Int,Int)
             let task = TaskModel(taskDate: date, taskName: name)
-            let taskViewModel = TaskViewModel(task: task)
+            let taskViewModel = TaskViewModel(task: task, taskTime: taskTime)
             taskViewModelArray.append(taskViewModel)
         }
         return taskViewModelArray

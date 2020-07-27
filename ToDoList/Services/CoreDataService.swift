@@ -12,7 +12,7 @@ import os.log
 
 class CoreDataService {
     
-    static func saveTask(_ task: TaskModel) -> Bool{
+    static func saveTask(_ task: TaskViewModel) -> Bool{
         
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("No app delegate")
@@ -23,10 +23,12 @@ class CoreDataService {
         let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)
         
         let managedObject = NSManagedObject(entity: entity!, insertInto: managedContext)
-        
+        print("Task Date is \(task.date)")
         managedObject.setValue(task.taskName, forKey: "name")
-        managedObject.setValue(task.taskDate, forKey: "date")
+        managedObject.setValue(task.date, forKey: "date")
         managedObject.setValue(task.isCompleted, forKey: "isCompleted")
+        managedObject.setValue(task.taskTime.0, forKey: "taskHour")
+        managedObject.setValue(task.taskTime.1, forKey: "taskMinute")
         
         do {
             try managedContext.save()

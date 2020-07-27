@@ -58,19 +58,22 @@ class NotificationService {
         
         //configure notification Content
         notificationContent.title = "Reminder!"
-        notificationContent.body = "Its Time Your Task!! Bruh \u{1F600}"
+        notificationContent.body = "Its Time For Your Task!! Bruh \u{1F600}"
         notificationContent.subtitle = task.taskName
         
         //Add triger
-        let dateComponents = Calendar.current.dateComponents(Set<Calendar.Component>(arrayLiteral: Calendar.Component.year, Calendar.Component.month, Calendar.Component.day), from: task.date)
-//        dateComponents.hour
-//
-//        dateComponents.minute = 42
-        print("yadayayayayaa \(dateComponents)")
+        print("task date in notification \(task.date)")
+        var dateComponents = Calendar.current.dateComponents(Set<Calendar.Component>(arrayLiteral: Calendar.Component.year, Calendar.Component.month, Calendar.Component.day), from: task.date)
+        print("date components date \(dateComponents.date)")
+        dateComponents.day = dateComponents.day! - 1 
+        dateComponents.hour = task.taskTime.0
+        dateComponents.minute = task.taskTime.1
+        
+        print("Notification set for \(dateComponents)")
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         
         //create notification request
-        let request = UNNotificationRequest(identifier: "demoRequest", content: notificationContent, trigger: trigger)
+        let request = UNNotificationRequest(identifier: task.taskName, content: notificationContent, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {

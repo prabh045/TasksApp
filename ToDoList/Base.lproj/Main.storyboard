@@ -95,8 +95,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="KHe-zJ-HrC">
-                                <rect key="frame" x="20" y="176" width="374" height="316"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="KHe-zJ-HrC">
+                                <rect key="frame" x="20" y="176" width="374" height="410"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="50" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Name Here" textAlignment="natural" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="elg-pT-zjf">
                                         <rect key="frame" x="87" y="0.0" width="200" height="50"/>
@@ -106,13 +106,19 @@
                                             <outlet property="delegate" destination="Yw1-kr-fbg" id="w10-Zp-LRR"/>
                                         </connections>
                                     </textField>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="S9a-P6-y4H">
-                                        <rect key="frame" x="27" y="100" width="320" height="216"/>
+                                    <datePicker contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="150" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="S9a-P6-y4H">
+                                        <rect key="frame" x="27" y="80" width="320" height="150"/>
                                         <connections>
                                             <action selector="dateChanged:" destination="Yw1-kr-fbg" eventType="valueChanged" id="BqT-MA-egj"/>
                                         </connections>
                                     </datePicker>
+                                    <datePicker contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="150" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="K6p-hT-UlH">
+                                        <rect key="frame" x="27" y="260" width="320" height="150"/>
+                                    </datePicker>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="elg-pT-zjf" firstAttribute="width" secondItem="S9a-P6-y4H" secondAttribute="width" multiplier="0.625" id="uOs-ZQ-Gu5"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.074834118150684928" green="0.95352097602739738" blue="0.9471050941780822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -136,8 +142,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="taskDatePicker" destination="S9a-P6-y4H" id="kla-2f-3lL"/>
                         <outlet property="taskNameTextField" destination="elg-pT-zjf" id="2xp-S9-ifv"/>
-                        <outlet property="taskTimePicker" destination="S9a-P6-y4H" id="kla-2f-3lL"/>
+                        <outlet property="taskTimePicker" destination="K6p-hT-UlH" id="N3y-gK-hpW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idD-8E-p0I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
