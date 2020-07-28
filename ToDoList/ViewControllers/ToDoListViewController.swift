@@ -44,6 +44,23 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    //MARK: Tableview Delegate Methods
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            CoreDataService.deleteTask(at: indexPath) {
+                self.toDoList.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     //MARK: Actions
     
     @IBAction func addTask(_ sender: UIBarButtonItem) {

@@ -12,6 +12,8 @@ import os.log
 
 class CoreDataService {
     
+    static private var fetchedManagedObjects = [NSManagedObject]()
+    
     static func saveTask(_ task: TaskViewModel) -> Bool{
         
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -53,6 +55,7 @@ class CoreDataService {
         do {
             let tasks = try managedcontext.fetch(fetchRequest)
             os_log("Tasks fetched successfully", [tasks])
+            fetchedManagedObjects = tasks
             return tasks
         } catch  {
             os_log("Could not fetch tasks")
@@ -60,4 +63,19 @@ class CoreDataService {
         }
     }
     
+    static func deleteTask(at indexPath: IndexPath,completionHandler: @escaping () -> Void) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("no app delegate found")
+        }
+        
+        let managedcontext = appDelegate.persistentContainer.viewContext
+        let objectToDelete = fetchedManagedObjects[indexPath.row]
+        managedcontext.delete(objectToDelete)
+        do {
+            try managedcontext.save()
+        } catch {
+            os_log("Error in saving data after deleting")
+        }
+        completionHandler()
+    }
 }

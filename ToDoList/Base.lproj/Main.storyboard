@@ -95,37 +95,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="KHe-zJ-HrC">
-                                <rect key="frame" x="20" y="176" width="374" height="410"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="QYe-Am-iSl">
+                                <rect key="frame" x="20" y="106" width="374" height="511"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="50" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Name Here" textAlignment="natural" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="elg-pT-zjf">
-                                        <rect key="frame" x="87" y="0.0" width="200" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="PEO-qD-veS"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="Yw1-kr-fbg" id="w10-Zp-LRR"/>
                                         </connections>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind Me On" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m38-IX-zRC">
+                                        <rect key="frame" x="0.0" y="80" width="112.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <datePicker contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="150" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="S9a-P6-y4H">
-                                        <rect key="frame" x="27" y="80" width="320" height="150"/>
+                                        <rect key="frame" x="0.0" y="130.5" width="320" height="150"/>
                                         <connections>
                                             <action selector="dateChanged:" destination="Yw1-kr-fbg" eventType="valueChanged" id="BqT-MA-egj"/>
                                         </connections>
                                     </datePicker>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind Me At" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsZ-C3-tLw">
+                                        <rect key="frame" x="0.0" y="310.5" width="107" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <datePicker contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="150" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="K6p-hT-UlH">
-                                        <rect key="frame" x="27" y="260" width="320" height="150"/>
+                                        <rect key="frame" x="0.0" y="361" width="320" height="150"/>
                                     </datePicker>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="elg-pT-zjf" firstAttribute="width" secondItem="S9a-P6-y4H" secondAttribute="width" multiplier="0.625" id="uOs-ZQ-Gu5"/>
-                                </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.074834118150684928" green="0.95352097602739738" blue="0.9471050941780822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KHe-zJ-HrC" firstAttribute="top" secondItem="Dkg-N0-zdU" secondAttribute="top" constant="120" id="MWN-cs-92R"/>
-                            <constraint firstItem="KHe-zJ-HrC" firstAttribute="leading" secondItem="Dkg-N0-zdU" secondAttribute="leading" constant="20" id="k3t-tY-hq2"/>
-                            <constraint firstItem="Dkg-N0-zdU" firstAttribute="trailing" secondItem="KHe-zJ-HrC" secondAttribute="trailing" constant="20" id="scB-Fg-xDt"/>
+                            <constraint firstItem="Dkg-N0-zdU" firstAttribute="trailing" secondItem="QYe-Am-iSl" secondAttribute="trailing" constant="20" id="CPF-RR-Zra"/>
+                            <constraint firstItem="QYe-Am-iSl" firstAttribute="top" secondItem="Dkg-N0-zdU" secondAttribute="top" constant="50" id="kB6-Gw-aXz"/>
+                            <constraint firstItem="QYe-Am-iSl" firstAttribute="leading" secondItem="Dkg-N0-zdU" secondAttribute="leading" constant="20" id="mvx-ek-AuM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dkg-N0-zdU"/>
                     </view>
