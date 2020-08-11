@@ -16,18 +16,22 @@ class NotificationService {
        
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
             
+            
+            
             switch notificationSettings.authorizationStatus {
                 
             case .notDetermined:
                 os_log("Ask for persmission")
-                askForNotificationPermission()
                 
             case .authorized:
                 //save local notification
+                //or register for remote notification
                 os_log("We have permsiion .do something now")
                 scheduleNotification(for: task)
                 
             case .denied:
+                //display alert to open setting app
+                //Alert.showNotificationSettingAlert()
                 os_log("User dont want to be reminted of their tasks")
                 
             default:
@@ -37,16 +41,18 @@ class NotificationService {
     }
     
     
-    static func askForNotificationPermission() {
+    static func askForNotificationPermission(_ vc: UIViewController) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge,.sound,.alert]) { (success, error) in
             if let error = error {
                 os_log("Error in asking permission", [error])
                 return
             }
             guard success else {
+                Alert.showNotificationSettingAlert(vc)
                 os_log("permission not granted")
                 return
             }
+          
             os_log("Permission granted")
             
         }
